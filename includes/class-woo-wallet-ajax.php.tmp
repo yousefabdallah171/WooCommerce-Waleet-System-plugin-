@@ -1,0 +1,14 @@
+
+	/**
+	 * Return add wallet balance template for thickbox.
+	 *
+	 * @return void
+	 */
+	public function add_wallet_balance_template() {
+		check_ajax_referer( 'woo-wallet-add-balance-template', 'security' );
+		$user_id = isset( $_REQUEST['user_id'] ) ? absint( $_REQUEST['user_id'] ) : 0;
+		ob_start();
+		woo_wallet()->get_template( 'admin/add-balance.php', array( 'user_id' => $user_id ) );
+		echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		wp_die();
+	}
